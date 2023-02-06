@@ -1,6 +1,8 @@
 import React from 'react'
 import apply from '../assets/apply.jpg'
 import track from '../assets/track.jpg'
+import { Link } from "react-router-dom";
+
 
 export default function Landing() {
   return (
@@ -14,7 +16,7 @@ export default function Landing() {
                 Take control of your job serach and stay on top of your game with one app.
                 Land your dream job with ease, track your progress and never miss an opportunity with Trace!
             </p>
-            <button>Get Started for Free</button>
+            <Link to='/signup'>Get Started for Free</Link>
         </section>
         <section>
             <div>
