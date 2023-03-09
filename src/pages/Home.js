@@ -1,56 +1,31 @@
-import { React, useState, useEffect} from "react";
-import { useNavigate } from "react-router";
+
+import { useJobs } from "../context/JobsContext";
+import React, { useState, useEffect } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useUserAuth } from "../context/UserAuthContext";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebase.utils";
-import { collection, getDocs } from "firebase/firestore";
 
 const Home = () => {
-  const { logOut, user } = useUserAuth();
-  const navigate = useNavigate();
-  const handleLogout = async () => {
-    try {
-      await logOut();
-      navigate("/");
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-  const [hackerNews, setHackerNews] = useState([])
-  const hackerNewsRef = collection(db, 'jobs', 'hackerNewsJobs', 'reactJobs')
+ const { user } = useUserAuth();
+  const { hackerNews, markAsApplied } = useJobs()
 
-  useEffect(() => {
-    const getJobs = async() => {
-      const data = await getDocs(hackerNewsRef)
-      setHackerNews(data.docs.map((doc) => ({
-        ...doc.data(), id: doc.id
-      })))
-      console.log("My data:" , hackerNews)
-    }
-
-    getJobs()
-  }, [])
   return (
-    <>
-      <div className="p-4 box mt-3 text-center">
-        Hello Welcome <br />
-        {user && user.email}
-      </div>
-      <div className="d-grid gap-2">
-        <button variant="primary" onClick={handleLogout}>
-          Log out
-        </button>
-      </div>
+    <>  
       <div>
-        {hackerNews.map((user) => {
+        {hackerNews.map((job) => {
           return (
-            <div key={user.id}>
-              <p>{user.companyName}</p>
+            <div key={job.id}>
+              <p>{job.companyName}</p>
               <a
-                href={`mailto:${user.recruiterMail}`}
+                href={`mailto:${job.recruiterMail}`}
               >
                 {" "}
-                Email {user.companyName}
+                Email {job.companyName}
               </a>
+              <button onClick={() => markAsApplied(job)}>
+                Mark as applied 
+              </button>
             </div>
           );
           
