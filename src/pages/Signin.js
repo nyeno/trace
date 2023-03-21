@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
+import Input from "../components/Input";
+import signin from '../assets/illustrations/signin.svg'
 
 export default function Signin() {
       const [email, setEmail] = useState("");
@@ -20,23 +22,40 @@ export default function Signin() {
         }
       };
 
-    return (
-      <>
-        <form onSubmit={handleSubmit}>
+  return (
+    <main className="flex justify-center items-center">
+      <div className="hidden lg:block bg-cornflower basis-1/2 mb-8">
+        <img src={signin} />
+      </div>
+      <div className="basis-1/2 h-full lg:mx-12 mt-16 lg:mt-0">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {error && <p>{error}</p>}
-          <div>
-            <p>Email</p>
-            <input onChange={(e) => setEmail(e.target.value)} />
-          </div>
-          <div>
-            <p>Password</p>
-            <input onChange={(e) => setPassword(e.target.value)} />
-          </div>
-          <button type="submit">Sign In</button>
+          <Input
+            label="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+          />
+          <Input
+            label="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+          />
+
+          <button
+            type="submit"
+            className="bg-cornflower text-white px-5 py-2 rounded"
+          >
+            Sign In
+          </button>
         </form>
         <div className="p-4 box mt-3 text-center">
-          Already have an account? <Link to="/">Log In</Link>
+          No account yet?{" "}
+          <Link to="/signup" className="text-cornflower underline">
+            Create a new account
+          </Link>
         </div>
-      </>
-    );
+      </div>
+    </main>
+  );
+   
 }

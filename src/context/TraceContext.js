@@ -10,6 +10,7 @@ const traceContext = createContext();
 export function TraceContextProvider({ children }) {
     const {user} = useUserAuth()
     const [columns, setColumns] = useState({
+      
     applied: { name: "Applied", items: [] },
     interview1: { name: "Interview 1", items: [] },
     interview2: { name: "Interview 2", items: [] },
@@ -20,7 +21,7 @@ export function TraceContextProvider({ children }) {
   });
 
   const [value, loading, error] = useCollection(
-    collection(db, "users", `${user.uid}`, "appliedJobs"),
+    collection(db, "users", `${user?.uid}`, "appliedJobs"),
     where("status", "in", [
       "Applied",
       "interview 1",
@@ -47,7 +48,7 @@ export function TraceContextProvider({ children }) {
       };
       setColumns(newColumns);
       }
-      console.log(columns)
+      //  console.log(columns)
   }, [value]);
     
 const onDragEnd = async (result) => {
@@ -61,7 +62,7 @@ const onDragEnd = async (result) => {
   // Check if the draggable item was dropped in a different column than the source
   if (source.droppableId !== destination.droppableId) {
     // Update the status of the job in the database
-    const jobId = parseInt(draggableId);
+    //const jobId = parseInt(draggableId);
     const newStatus = destination.droppableId;
 
     await updateDoc(doc(db, "users", user.uid, "appliedJobs", draggableId), {

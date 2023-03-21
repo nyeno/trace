@@ -1,5 +1,6 @@
 import { React, useState } from 'react'
 import { useJobs } from '../context/JobsContext';
+import Input from '../components/Input';
 
 export default function PostJob() {
     const [companyDescription, setCompanyDescription] = useState("");
@@ -8,66 +9,97 @@ export default function PostJob() {
     const [jobDescription, setJobDescription] = useState("");
     const [location, setLocation] = useState("");
     const [recruiterMail, setRecruiterMail] = useState("");
-    const [remote, setRemote] = useState("");
     const [salary, setSalary] = useState("");
-    const [tag, setTag] = useState("");
+    const [jobRole, setJobRole] = useState("")
+    const [jobBoard, setJobBoard] = useState("");
 
-    const {postJob} = useJobs()
-        const handleSubmit = async (e) => {
+  const { postJob } = useJobs()
+  
+  const handleSubmit = async (e) => {
           e.preventDefault();
           postJob(
             companyName,
             companyDescription,
             companyWebsite,
+            jobRole,
             jobDescription,
             location,
             recruiterMail,
-            remote,
             salary,
-            tag
+            jobBoard
           );
-        };
+          setCompanyDescription("")
+          setCompanyName("")
+          setCompanyWebsite("")
+          setJobBoard("")
+          setJobDescription("")
+          setJobRole("")
+          setLocation("")
+          setRecruiterMail("")
+          setSalary("")
+  };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <p>Company Name</p>
-          <input onChange={(e) => setCompanyName(e.target.value)} />
-        </div>
-        <div>
-          <p>Company Description</p>
-          <input onChange={(e) => setCompanyDescription(e.target.value)} />
-        </div>
-        <div>
-          <p>Job Description</p>
-          <input onChange={(e) => setJobDescription(e.target.value)} />
-        </div>
-        <div>
-          <p>Company Website</p>
-          <input onChange={(e) => setCompanyWebsite(e.target.value)} />
-        </div>
-        <div>
-          <p>Location</p>
-          <input onChange={(e) => setLocation(e.target.value)} />
-        </div>
-        <div>
-          <p>Recruiter Mail</p>
-          <input onChange={(e) => setRecruiterMail(e.target.value)} />
-        </div>
-        <div>
-          <p>Remote</p>
-          <input onChange={(e) => setRemote(e.target.value)} />
-        </div>
-        <div>
-          <p>Salary</p>
-          <input onChange={(e) => setSalary(e.target.value)} />
-        </div>
-        <div>
-          <p>Tag</p>
-          <input onChange={(e) => setTag(e.target.value)} />
-        </div>
-        <button type="submit">Post Job</button>
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 p-6 w-full h-full overflow-auto"
+      >
+        <Input
+          label="Company Name"
+          onChange={(e) => setCompanyName(e.target.value)}
+          placeholder="Enter company name"
+        />
+        <Input
+          label="Job Role"
+          onChange={(e) => setJobRole(e.target.value)}
+          placeholder="e.g Frontend Developer"
+          type="text"
+        />
+        <Input
+          label="Job Board"
+          onChange={(e) => setJobBoard(e.target.value)}
+          placeholder="What job board is the job sourced from"
+        />
+        <Input
+          label="Company Description"
+          onChange={(e) => setCompanyDescription(e.target.value)}
+          placeholder="Enter the company description"
+          type="textarea"
+        />
+        <Input
+          label="Job Description"
+          onChange={(e) => setJobDescription(e.target.value)}
+          placeholder="Enter the job description"
+          type="textarea"
+        />
+        <Input
+          label="Company Website"
+          onChange={(e) => setCompanyWebsite(e.target.value)}
+          placeholder="Enter the ompany website"
+        />
+        <Input
+          label="Company Location"
+          onChange={(e) => setLocation(e.target.value)}
+          placeholder="Where is the company located?"
+        />
+        <Input
+          label="Recruiter Mail"
+          onChange={(e) => setRecruiterMail(e.target.value)}
+          placeholder="Please enter email of recruiter to contact"
+        />
+        <Input
+          label="Salary Range"
+          onChange={(e) => setSalary(e.target.value)}
+          placeholder="Please the salary range with the appropraite currency symbol e.g $1000"
+        />
+
+        <button
+          type="submit"
+          className="bg-cornflower text-white px-5 py-2 rounded "
+        >
+          Post Job
+        </button>
       </form>
     </>
   );

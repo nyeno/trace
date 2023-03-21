@@ -11,48 +11,55 @@ import { JobsContextProvider } from './context/JobsContext';
 import PostJob from './pages/PostJob';
 import Tracer from "./pages/Tracer";
 import { TraceContextProvider } from './context/TraceContext';
+import { SidebarLayout } from "./components/Layout";
+import { ThemeContextProvider } from './context/ThemeContext';
 
 
 function App() {
   //const { isAuth } = useUserAuth()
   return (
     <div className="App">
-      <UserAuthContextProvider>
-        <JobsContextProvider>
-          <TraceContextProvider>
-            <Header />
-            <Routes>
-              <Route exact path="/" element={<Landing />} />
-              <Route exact path="/signup" element={<Signup />} />
-              {<Route exact path="/signin" element={<Signin />} />}
-              <Route
-                path="/home"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/postJob"
-                element={
-                  <ProtectedRoute>
-                    <PostJob />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/myJobs"
-                element={
-                  <ProtectedRoute>
-                    <Tracer />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </TraceContextProvider>
-        </JobsContextProvider>
-      </UserAuthContextProvider>
+      <ThemeContextProvider>
+        <UserAuthContextProvider>
+          <JobsContextProvider>
+            <TraceContextProvider>
+              <Header />
+
+              <Routes className="mt-16">
+                <Route exact path="/" element={<Landing />} />
+                <Route exact path="/signup" element={<Signup />} />
+                <Route exact path="/signin" element={<Signin />} />
+                <Route element={<SidebarLayout />}>
+                  <Route
+                    path="/home"
+                    element={
+                      <ProtectedRoute>
+                        <Home />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/postJob"
+                    element={
+                      <ProtectedRoute>
+                        <PostJob />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/myJobs"
+                    element={
+                      <ProtectedRoute>
+                        <Tracer />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Route>
+              </Routes>
+            </TraceContextProvider>
+          </JobsContextProvider>
+        </UserAuthContextProvider>
+      </ThemeContextProvider>
     </div>
   );
 }
