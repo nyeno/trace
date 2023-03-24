@@ -1,20 +1,12 @@
-import React, {useEffect} from 'react'
-import { Link, useNavigate } from "react-router-dom";
-import { useUserAuth } from '../context/UserAuthContext';
+import React from 'react'
+import { Link } from "react-router-dom";
+
 import plugin from '../assets/illustrations/plugin.svg'
 import achieve from "../assets/illustrations/achieve.svg";
 
 export default function Landing() {
-  const { user } = useUserAuth()
-  const navigate = useNavigate()
-  useEffect(() => {
-    if (user) {
-      navigate("/home")
-    }
-    else {
-      navigate("/")
-    }
-  })
+
+ 
   return (
     <main>
       <section className="py-6 lg:py-16 lg:px-32 px-8 text-center">
