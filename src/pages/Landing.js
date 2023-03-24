@@ -11,6 +11,9 @@ export default function Landing() {
     if (user) {
       navigate("/home")
     }
+    else {
+      navigate("/")
+    }
   })
   return (
     <main>
