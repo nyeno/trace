@@ -44,11 +44,10 @@ export default function Signup() {
   return (
     <main className="lg:flex justify-center items-center h-full">
       <div className="hidden lg:block bg-cornflower basis-1/2 self-stretch">
-        <img src={signin} />
+        <img src={signin} alt='sign up illustration '/>
       </div>
       <div className="basis-1/2 lg:mx-12 px-8 lg:px-0  mt-16 lg:mt-0">
         <form onSubmit={handleSubmit} className="space-y-6 pt-2">
-         
           <Input
             label="First Name"
             onChange={(e) => setFirstName(e.target.value)}

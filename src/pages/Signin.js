@@ -5,6 +5,7 @@ import Input from "../components/Input";
 import signin from '../assets/illustrations/signin.svg'
 import { getAuthErrorMessage } from "../firebase/errorCodes";
 
+
 export default function Signin() {
       const [email, setEmail] = useState("");
       const [password, setPassword] = useState("");
@@ -26,7 +27,7 @@ export default function Signin() {
 
   return (
     <main className="flex justify-center items-center">
-      <div className="hidden lg:block bg-cornflower basis-1/2 mb-8">
+      <div className="hidden lg:block bg-cornflower basis-1/2 mb-8 lg:mb-0 self-stretch">
         <img src={signin} alt="Sign in illustration"/>
       </div>
       <div className="basis-1/2 h-full lg:mx-12 mt-16 lg:mt-0">
