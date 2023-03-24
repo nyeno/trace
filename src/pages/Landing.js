@@ -1,6 +1,4 @@
 import React, {useEffect} from 'react'
-import apply from '../assets/apply.jpg'
-import track from '../assets/track.jpg'
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from '../context/UserAuthContext';
 import plugin from '../assets/illustrations/plugin.svg'
