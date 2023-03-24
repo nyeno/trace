@@ -6,6 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 import signin from '../assets/illustrations/signin.svg'
 import Input from '../components/Input';
+import { getAuthErrorMessage } from '../firebase/errorCodes';
 
 export default function Signup() {
     const [email, setEmail] = useState("");
@@ -13,12 +14,18 @@ export default function Signup() {
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const { signUp, user } = useUserAuth();
+    const [password2, setPassword2] = useState("")
+    const { signUp } = useUserAuth();
+  
     let navigate = useNavigate();
   
     const handleSubmit = async (e) => {
       e.preventDefault();
       setError("");
+      if (password !== password2) {
+        setError("Passwords do not match.");
+        return;
+      }
       try {
         let userDetails = await signUp(email, password);
         await setDoc(doc(db, "users", userDetails.user.uid), {
@@ -27,41 +34,50 @@ export default function Signup() {
         await updateProfile(userDetails.user, {
           displayName: firstName + " " + lastName
         });
-        await console.log(userDetails)
+        //await console.log(userDetails)
         await navigate("/home");
       } catch (err) {
-        setError(err.message);
+        const errMessage = getAuthErrorMessage(err.code)
+        setError(errMessage);
       }
   };
   return (
-    <main className="flex justify-center items-center">
-      <div className="hidden lg:block bg-cornflower basis-1/2 mb-8">
+    <main className="lg:flex justify-center items-center h-full">
+      <div className="hidden lg:block bg-cornflower basis-1/2 self-stretch">
         <img src={signin} />
       </div>
-      <div className="basis-1/2 h-full lg:mx-12  mt-16 lg:mt-0">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="basis-1/2 lg:mx-12 px-8 lg:px-0  mt-16 lg:mt-0">
+        <form onSubmit={handleSubmit} className="space-y-6 pt-2">
           {error && <p>{error}</p>}
           <Input
             label="First Name"
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="e.g John"
+            type="text"
+            required
           />
           <Input
             label="Last Name"
             onChange={(e) => setLastName(e.target.value)}
             placeholder="e.g Doe"
+            type="text"
           />
           <Input
             label="Email"
             onChange={(e) => setEmail(e.target.value)}
             placeholder="e.g johndoe@gmail.com"
+            type="email"
           />
           <Input
             label="Password"
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
-          <Input label="Reenter Password" />
+          <Input
+            label="Reenter Password"
+            type="password"
+            onChange={(e) => setPassword2(e.target.value)}
+          />
           <button
             type="submit"
             className="bg-cornflower text-white px-5 py-2 rounded"

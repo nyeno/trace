@@ -22,17 +22,24 @@ export default function Header() {
       {user && (
         <>
           <div className="flex space-x-4 items-center">
-            <p className='hidden md:block'>Welcome, {user && user.displayName} </p>
-            <button variant="primary" onClick={handleLogout}  className="bg-cornflower text-white px-5 py-2 rounded"
-          >
+            <p className="hidden md:block">
+              Welcome, {user && user.displayName}{" "}
+            </p>
+            <button
+              variant="primary"
+              onClick={handleLogout}
+              className="bg-cornflower text-white px-5 py-2 rounded"
+            >
               Log out
             </button>
           </div>
         </>
       )}
       {!user && (
-        <div className="space-x-8 mx-6 font-medium text-md">
-          <Link to="/signup">Get Started for Free</Link>
+        <div className="space-x-8 mx-6 font-medium text-md hidden lg:block">
+          <Link to="/signup" >
+            Get Started for Free
+          </Link>
           <Link
             to="/signin"
             className="bg-cornflower text-white px-5 py-2 rounded"

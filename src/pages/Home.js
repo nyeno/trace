@@ -1,14 +1,17 @@
-
 import { useJobs } from "../context/JobsContext";
 import React, { useState, useEffect } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../firebase/firebase.utils";
 import Modal from "../components/Modal";
 
 const Home = () => {
- const { user } = useUserAuth();
+  const { user } = useUserAuth();
+  const navigate = useNavigate()
+   useEffect(() => {
+     if (!user) {
+       navigate("/");
+     }
+   });
   const { hackerNews, markAsApplied, allAppliedJobs } = useJobs()
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -42,7 +45,7 @@ const Home = () => {
               >
                 More details ...
               </button>
-              {!allAppliedJobs.includes(job.id) ? (
+              {!allAppliedJobs?.includes(job.id) ? (
                 <button
                   onClick={() => {
                     markAsApplied(job);

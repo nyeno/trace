@@ -47,7 +47,7 @@ export default function Landing() {
           <img src={achieve} alt="" className=" rounded-md" />
         </div>
       </section>
-      <section className="flex items-center my-8 justify-between">
+      <section className="flex flex-row-reverse items-center my-8 justify-between">
         <div className="hidden bg-cornflower lg:flexjustify-start rounded-r-md w-full">
           <img src={plugin} alt="" className="rounded-md " />
         </div>
@@ -59,6 +59,9 @@ export default function Landing() {
             No more messy spreadsheets. Trace keeps track of every detail about
             your job opportunities, regardless of where you found them
           </p>
+        </div>
+        <div className="hidden bg-cornflower lg:flex justify-start rounded-r-md">
+          <img src={plugin} alt="" className=" rounded-md" />
         </div>
       </section>
     </main>
