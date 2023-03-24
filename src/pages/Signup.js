@@ -48,7 +48,7 @@ export default function Signup() {
       </div>
       <div className="basis-1/2 lg:mx-12 px-8 lg:px-0  mt-16 lg:mt-0">
         <form onSubmit={handleSubmit} className="space-y-6 pt-2">
-          {error && <p>{error}</p>}
+         
           <Input
             label="First Name"
             onChange={(e) => setFirstName(e.target.value)}
@@ -78,6 +78,7 @@ export default function Signup() {
             type="password"
             onChange={(e) => setPassword2(e.target.value)}
           />
+          {error && <p className="text-orangish">{error}</p>}
           <button
             type="submit"
             className="bg-cornflower text-white px-5 py-2 rounded"

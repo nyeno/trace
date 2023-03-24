@@ -28,12 +28,12 @@ export default function SideBar() {
                 onClick={() => closeModal()}
                 className={ `flex ${modalOpen ? "justify-end" : "justify-center"}`}
               >
-                <img src={eyeOpen} className="w-6 h-6" />
+                <img src={eyeOpen} className="w-6 h-6" alt='modal toggle'/>
               </button>
             )}
             {!modalOpen && (
               <button onClick={() => openModal()} className={ `flex ${modalOpen ? "justify-end" : "justify-center"}`}>
-                <img src={modalClosed} className="w-6 h-6" />
+                <img src={modalClosed} className="w-6 h-6" alt='modal toggle'/>
               </button>
             )}
             <Link

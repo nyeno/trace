@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 import Input from "../components/Input";
 import signin from '../assets/illustrations/signin.svg'
+import { getAuthErrorMessage } from "../firebase/errorCodes";
 
 export default function Signin() {
       const [email, setEmail] = useState("");
@@ -18,18 +19,18 @@ export default function Signin() {
           await logIn(email, password);
           navigate("/home");
         } catch (err) {
-          setError(err.message);
+          const errMessage = getAuthErrorMessage(err.code)
+          setError(errMessage);
         }
       };
 
   return (
     <main className="flex justify-center items-center">
       <div className="hidden lg:block bg-cornflower basis-1/2 mb-8">
-        <img src={signin} />
+        <img src={signin} alt="Sign in illustration"/>
       </div>
       <div className="basis-1/2 h-full lg:mx-12 mt-16 lg:mt-0">
         <form onSubmit={handleSubmit} className="space-y-6">
-          {error && <p>{error}</p>}
           <Input
             label="Email"
             onChange={(e) => setEmail(e.target.value)}
@@ -40,7 +41,7 @@ export default function Signin() {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
-
+          {error && <p className="text-orangish">{error}</p>}
           <button
             type="submit"
             className="bg-cornflower text-white px-5 py-2 rounded"
