@@ -17,7 +17,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between py-3 shadow px-4 items-center sticky w-full top-0 bg-white h-16 z-50">
+    <header className="flex justify-between py-3 shadow px-4 items-center sticky w-screen top-0 bg-white h-16 z-50">
       <h1 className="text-3xl font-bold tracking-wide">.trace</h1>
       {user && (
         <>
@@ -36,8 +36,8 @@ export default function Header() {
         </>
       )}
       {!user && (
-        <div className="space-x-8 mx-6 font-medium text-md hidden lg:block">
-          <Link to="/signup" >
+        <div className="space-x-8 mx-6 font-medium text-md">
+          <Link to="/signup" className="hidden lg:block">
             Get Started for Free
           </Link>
           <Link

@@ -31,8 +31,8 @@ export default function Landing() {
           Get Started for Free
         </Link>
       </section>
-      <section className="flex items-center my-8 justify-between w-full">
-        <div className="flex flex-col items-center mx-12">
+      <section className="flex flex-col lg:flex-row items-center my-8 justify-between w-full">
+        <div className="flex flex-col items-center lg:mx-12 mx-2">
           <h2 className="lg:text-5xl text-3xl font-bold mb-8">
             Land your dream role
           </h2>
@@ -41,15 +41,15 @@ export default function Landing() {
             you never feel like you are missing out
           </p>
         </div>
-        <div className="hidden bg-cornflower lg:flex justify-end rounded-l-md">
-          <img src={achieve} alt="" className=" rounded-md" />
+        <div className="my-6 lg:my-0 bg-cornflower lg:flex lg:justify-end lg:rounded-l-md">
+          <img src={achieve} alt="" className=" rounded-md px-4 lg:px-0" />
         </div>
       </section>
-      <section className="flex flex-row-reverse items-center my-8 justify-between">
+      <section className="flex flex-col lg:flex-row-reverse items-center my-8 justify-between">
         <div className="hidden bg-cornflower lg:flexjustify-start rounded-r-md w-full">
           <img src={plugin} alt="" className="rounded-md " />
         </div>
-        <div className="flex flex-col items-center mx-16">
+        <div className="flex flex-col items-center lg:mx-16 mx-2">
           <h2 className="lg:text-5xl text-3xl font-bold mb-8">
             Track your Applications
           </h2>
@@ -58,7 +58,7 @@ export default function Landing() {
             your job opportunities, regardless of where you found them
           </p>
         </div>
-        <div className="hidden bg-cornflower lg:flex justify-start rounded-r-md">
+        <div className="my-6 lg:my-0 bg-cornflower lg:flex lg:justify-start lg:rounded-r-md">
           <img src={plugin} alt="" className=" rounded-md" />
         </div>
       </section>
