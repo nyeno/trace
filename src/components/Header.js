@@ -36,7 +36,7 @@ export default function Header() {
         </>
       )}
       {!user && (
-        <div className="space-x-8 mx-6 font-medium text-md">
+        <div className="flex items-center space-x-8 mx-6 font-medium text-md">
           <Link to="/signup" className="hidden lg:block">
             Get Started for Free
           </Link>
