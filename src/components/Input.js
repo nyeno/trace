@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Input({ placeholder, onChange, type, label }) {
+export default function Input({ placeholder, onChange, type, label, value }) {
   if(type === "textarea"){
     return (
       <div className="flex flex-col space-y-2">
@@ -10,6 +10,7 @@ export default function Input({ placeholder, onChange, type, label }) {
         placeholder={placeholder}
         onChange={onChange}
         type={type}
+        value={value}
      />
    </div> )
   }
@@ -22,6 +23,7 @@ export default function Input({ placeholder, onChange, type, label }) {
            placeholder={placeholder}
            onChange={onChange}
            type={type}
+           value={value}
            required
          />
        </div>

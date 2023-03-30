@@ -26,7 +26,7 @@ export function JobsContextProvider({ children }) {
               status: "Applied",
               jobRole: job.jobRole
         })
-      console.log(jobRef);
+      //console.log(jobRef);
       
     //const jobDoc = await jobRef.getDoc();
 
@@ -62,9 +62,9 @@ export function JobsContextProvider({ children }) {
             salary: salary,
             jobBoard: jobBoard
         });
-        console.log("Document written with ID: ", docRef.id);
+        return("Job posted successfully" );
         } catch (e) {
-        console.error("Error adding document: ", e);
+        return("Error adding job, please try again ", e);
         }
     };
   const getJobs = async () => {
@@ -79,16 +79,11 @@ export function JobsContextProvider({ children }) {
   };
 
 
-  //const userRef = doc(db, "users", user?.uid);
-  //const allAppliedJobsRef = doc(userRef);
+  const [allAppliedJobsSnapshot, allAppliedJobsLoading, allAppliedJobsError] =
+      useDocument(doc(db, "users", `${user?.uid}`), {
+        snapshotListenOptions: { includeMetadataChanges: true },
+  });
   
- // console.log(userRef, allAppliedJobsRef, "hsj");
-  
-const [allAppliedJobsSnapshot, allAppliedJobsLoading, allAppliedJobsError] =
-    useDocument(doc(db, "users", `${user?.uid}`), {
-      snapshotListenOptions: { includeMetadataChanges: true },
-});
- 
 useEffect(() => {
   if (allAppliedJobsSnapshot && allAppliedJobsSnapshot.exists()) {
     const userData = allAppliedJobsSnapshot.data();
@@ -96,13 +91,13 @@ useEffect(() => {
       setAllAppliedJobs(userData.allAppliedJobs); // extract the array from the data object
     }
   }
-   console.log(allAppliedJobs, "beeb");
+   //console.log(allAppliedJobs, "beeb");
 }, [allAppliedJobsSnapshot]);
   
   useEffect(() => {
     getJobs();
-    console.log(allAppliedJobs);
-    const interval=setInterval(()=>{
+    //console.log(allAppliedJobs);
+    const interval = setInterval(()=>{
      getJobs();
      },120000)
     return()=>clearInterval(interval)

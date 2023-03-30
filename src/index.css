@@ -24,6 +24,9 @@ code {
 .screen{
   width: calc(100vw - 14.5rem);
 }
+.mscreen{
+  width: calc(100vw - 4rem);
+}
 .hscreen{
   min-height: calc(100vh - 10rem);
   height: 100%;

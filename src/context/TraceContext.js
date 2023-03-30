@@ -3,7 +3,7 @@ import { db } from "../firebase/firebase.utils";
 import {useCollection} from 'react-firebase-hooks/firestore'
 import { collection, getDocs } from "firebase/firestore";
 import { useUserAuth } from "../context/UserAuthContext";
-import { setDoc, doc, addDoc, updateDoc, arrayUnion, where } from "firebase/firestore";
+import { setDoc, doc, addDoc, updateDoc, arrayUnion, where, deleteDoc } from "firebase/firestore";
 
 const traceContext = createContext();
 
@@ -50,7 +50,7 @@ export function TraceContextProvider({ children }) {
       }
       //  console.log(columns)
   }, [value]);
-    
+
 const onDragEnd = async (result) => {
   const { source, destination, draggableId } = result;
 
@@ -110,10 +110,19 @@ const onDragEnd = async (result) => {
   }
 };
 
+const handleDelete = async (job, columnId) => {
+  const newColumns = { ...columns };
+  newColumns[columnId].items = newColumns[columnId].items.filter(
+    (item) => item.id !== job.id
+  );
+  setColumns(newColumns);
+  console.log(job)
+  await deleteDoc(doc(db, "users", user.uid, "appliedJobs", job.id));
+};
 
 
   return (
-    <traceContext.Provider value={{ columns, setColumns, onDragEnd}}>
+    <traceContext.Provider value={{ columns, setColumns, onDragEnd, handleDelete}}>
       {children}
     </traceContext.Provider>
   );

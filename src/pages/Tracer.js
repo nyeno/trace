@@ -2,12 +2,17 @@ import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useTrace } from "../context/TraceContext";
 import { useTheme } from "../context/ThemeContext";
+import trash from '../assets/illustrations/trash.svg'
 //import { onDragEnd } from "../DragAndDrop/onDragEnd";
 
 
 function Tracer() {
   const { modalOpen } = useTheme();
-  const { columns, setColumns, onDragEnd } = useTrace()
+  const { columns, setColumns, onDragEnd, handleDelete } = useTrace()
+
+  const handleDeletedItem = (job, columnId) => {
+    handleDelete(job, columnId)
+  }
 
   return (
     <div
@@ -28,7 +33,6 @@ function Tracer() {
               }}
               key={columnId}
             >
-              {console.log(column)}
               <div className="flex items-center">
                 <div className="w-3 h-3 rounded-full bg-cornflower mr-2"></div>
                 <h2>{column.name + "   (" + column.items.length + ") "}</h2>
@@ -69,6 +73,9 @@ function Tracer() {
                                       ...provided.draggableProps.style,
                                     }}
                                   >
+                                    <button className="w-full flex justify-end " onClick={() => handleDeletedItem(item, columnId)}>
+                                      <img src={trash} alt="Delete job" className="w-4 h-4 " />
+                                    </button>
                                     <p>
                                       <span className="text-blackishGray font-light">
                                         {" "}

@@ -17,8 +17,8 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between py-3 shadow px-4 items-center sticky w-screen top-0 bg-white h-16 z-50">
-      <h1 className="text-3xl font-bold tracking-wide">.trace</h1>
+    <header className="flex justify-between py-3 shadow px-4 items-center fixed w-screen top-0 bg-white h-16 z-50">
+      <Link to="/" className="text-3xl font-bold tracking-wide">.trace</Link>
       {user && (
         <>
           <div className="flex space-x-4 items-center">

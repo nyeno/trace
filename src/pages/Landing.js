@@ -1,14 +1,15 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import { useUserAuth } from '../context/UserAuthContext';
 
 import plugin from '../assets/illustrations/plugin.svg'
 import achieve from "../assets/illustrations/achieve.svg";
 
 export default function Landing() {
-
+const { user } = useUserAuth()
  
   return (
-    <main>
+    <main className = "mt-16">
       <section className="py-6 lg:py-16 lg:px-32 px-8 text-center">
         <h1 className="lg:text-6xl text-3xl font-bold mb-8">
           Track Your Career Journey with Ease: Apply, Follow Up, Land Your Dream
@@ -19,12 +20,21 @@ export default function Landing() {
           app. Land your dream job with ease, track your progress and never miss
           an opportunity with Trace!
         </p>
-        <Link
-          to="/signup"
-          className="bg-cornflower text-white px-5 py-2 rounded text-xl"
-        >
-          Get Started for Free
-        </Link>
+        {user ? (
+          <Link
+            to="/home"
+            className="bg-cornflower text-white px-5 py-2 rounded text-xl"
+          >
+            Get Started for Free
+          </Link>
+        ) : (
+          <Link
+            to="/signup"
+            className="bg-cornflower text-white px-5 py-2 rounded text-xl"
+          >
+            Get Started for Free
+          </Link>
+        )}
       </section>
       <section className="flex flex-col lg:flex-row items-center my-8 justify-between w-full">
         <div className="flex flex-col items-center lg:mx-12 mx-2">

@@ -7,6 +7,7 @@ import { updateProfile } from "firebase/auth";
 import signin from '../assets/illustrations/signin.svg'
 import Input from '../components/Input';
 import { getAuthErrorMessage } from '../firebase/errorCodes';
+import {GoogleButton} from 'react-google-button'
 
 export default function Signup() {
     const [email, setEmail] = useState("");
@@ -15,10 +16,18 @@ export default function Signup() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [password2, setPassword2] = useState("")
-    const { signUp } = useUserAuth();
+    const { signUp, googleSignIn } = useUserAuth();
   
     let navigate = useNavigate();
-  
+    const handleGoogleSignIn = async (e) => {
+      e.preventDefault();
+      try {
+        await googleSignIn();
+        await navigate("/home");
+      } catch (err) {
+        console.log(err);
+      }
+    };
     const handleSubmit = async (e) => {
       e.preventDefault();
       setError("");
@@ -42,17 +51,25 @@ export default function Signup() {
       }
   };
   return (
-    <main className="lg:flex justify-center items-center h-full">
-      <div className="hidden lg:block bg-cornflower basis-1/2 self-stretch">
-        <img src={signin} alt='sign up illustration '/>
+    <main className="lg:flex justify-center items-center h-screen">
+      <div className="hidden lg:flex justify-center items-center bg-cornflower basis-1/2 h-screen ">
+        <img
+          src={signin}
+          alt="sign up illustration "
+          className="object-contain max-h-full "
+        />
       </div>
-      <div className="basis-1/2 lg:mx-12 px-8 lg:px-0  mt-16 lg:mt-0">
+      <div className="basis-1/2 lg:mx-12 px-8 lg:px-0 mt-32 lg:mt-0">
+        <div className="flex items-center justify-center my-8">
+          <GoogleButton onClick={handleGoogleSignIn} />
+        </div>
         <form onSubmit={handleSubmit} className="space-y-6 pt-2">
           <Input
             label="First Name"
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="e.g John"
             type="text"
+            pattern="[A-Za-z]+"
             required
           />
           <Input
@@ -60,21 +77,26 @@ export default function Signup() {
             onChange={(e) => setLastName(e.target.value)}
             placeholder="e.g Doe"
             type="text"
+            pattern="[A-Za-z]+"
+            required
           />
           <Input
             label="Email"
             onChange={(e) => setEmail(e.target.value)}
             placeholder="e.g johndoe@gmail.com"
             type="email"
+            required
           />
           <Input
             label="Password"
             onChange={(e) => setPassword(e.target.value)}
             type="password"
+            required
           />
           <Input
             label="Reenter Password"
             type="password"
+            required
             onChange={(e) => setPassword2(e.target.value)}
           />
           {error && <p className="text-orangish">{error}</p>}

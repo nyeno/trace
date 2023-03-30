@@ -13,7 +13,7 @@ export const SidebarLayout = () => {
         <SideBar />
       </div>
       <div
-        className={`${modalOpen ? "ml-56" : "ml-16"} w-full overflow-x-hidden `}
+        className={`${modalOpen ? "ml-56" : "ml-16"} mt-16 w-full overflow-x-hidden `}
       >
         <Outlet />
       </div>

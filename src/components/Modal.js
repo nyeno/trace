@@ -1,24 +1,28 @@
 import React from "react";
+import { useTheme } from "../context/ThemeContext";
 
 
-const Modal = ({job, closeModal, props}) => {
+const Modal = ({ job, closeModal, props }) => {
+  const {modalOpen} = useTheme()
   return (
     <div className="flex justify-center h-full bg-pink-100">
       <div
-        className="absolute bg-bluishWhite top-16 left-56 z-10 opacity-50 screen hscreen"
+        className={`${
+          modalOpen ? "left-56 screen" : "left-16 mscreen"
+        } absolute bg-bluishWhite top-16 z-10 opacity-50 hscreen`}
         onClick={closeModal}
       />
-      <div className="absolute bg-white m-auto p-4 lg:w-4/6 top-16 mt-4 h-max rounded-2xl z-20">
-        <div className="mb-7 rounded-md shadow flex lg:flex-row flex-col items-center justify-between">
+      <div className="absolute bg-white mx-4 p-4 lg:w-4/6 top-16 mt-8 h-max rounded-2xl z-20">
+        <div className="mb-7 rounded-md lg:shadow flex lg:flex-row flex-col items-center justify-between">
           <div className="flex items-center">
-            <p className="hidden md:block mb-8 md:mb-0 text-4xl font-bolder bg-cornflower text-white px-12 py-10 rounded-l-md ">
+            <p className="hidden lg:block mb-8 lg:mb-0 text-4xl font-bolder bg-cornflower text-white px-12 py-10 rounded-l-md ">
               {job.companyName.split("")[0]}
             </p>
             <h1 className="text-2xl font-bold  ml-4">{job.companyName}</h1>
           </div>
           <a
             href={job.companyWebsite}
-            className="mr-4 text-cornflower font-bold p-4 rounded bg-bluishWhite"
+            className="lg:mr-4 mt-4 lg:mt-0 text-cornflower font-bold p-4 rounded bg-bluishWhite"
           >
             Company Site
           </a>
