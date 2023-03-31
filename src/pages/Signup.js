@@ -51,16 +51,16 @@ export default function Signup() {
       }
   };
   return (
-    <main className="lg:flex justify-center items-center h-screen">
-      <div className="hidden lg:flex justify-center items-center bg-cornflower basis-1/2 h-screen ">
+    <main className="lg:flex justify-center">
+      <div className="hidden lg:flex items-center bg-cornflower basis-1/2 flex-1 self-stretch">
         <img
           src={signin}
           alt="sign up illustration "
-          className="object-contain max-h-full "
+          className=""
         />
       </div>
-      <div className="basis-1/2 lg:mx-12 px-8 lg:px-0 mt-32 lg:mt-0">
-        <div className="flex items-center justify-center my-8">
+      <div className="basis-1/2 lg:mx-12 px-8 lg:px-0 mt-16 flex-auto">
+        <div className="flex items-center justify-center my-8 lg:mb-4 pt-16 lg:mt-0">
           <GoogleButton onClick={handleGoogleSignIn} />
         </div>
         <form onSubmit={handleSubmit} className="space-y-6 pt-2">
@@ -107,7 +107,7 @@ export default function Signup() {
             Sign Up
           </button>
         </form>
-        <div className="p-4 box mt-3 text-center">
+        <div className="p-4 box mt-px text-center">
           Already have an account?{" "}
           <Link to="/signin" className="text-cornflower underline">
             Log In
