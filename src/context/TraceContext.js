@@ -116,7 +116,7 @@ const handleDelete = async (job, columnId) => {
     (item) => item.id !== job.id
   );
   setColumns(newColumns);
-  console.log(job)
+  //console.log(job)
   await deleteDoc(doc(db, "users", user.uid, "appliedJobs", job.id));
 };
 

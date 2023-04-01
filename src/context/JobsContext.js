@@ -19,7 +19,6 @@ export function JobsContextProvider({ children }) {
       const jobRef = doc(db, "users", user.uid);
       const userRef = doc(db, "users", user.uid);
       const jobDoc = await getDoc(userRef);
-      
         await setDoc(userDoc, {
               jobName: job.companyName,
               jobId: job.id,
@@ -39,15 +38,15 @@ export function JobsContextProvider({ children }) {
           await updateDoc(jobRef, {
               allAppliedJobs: arrayUnion(job.id),
             });
-          console.log("Job ID added to applied jobs array");
+          //console.log("Job ID added to applied jobs array");
         } else {
-          console.log("Job ID already exists in applied jobs array");
+          //console.log("Job ID already exists in applied jobs array");
         }
       } else {
-        console.log("User document not found");
+        //console.log("User document not found");
       }
   
-    console.log(allAppliedJobs)
+    //console.log(allAppliedJobs)
     };
   const postJob = async (companyName, companyDescription, companyWebsite, jobRole, jobDescription, location,recruiterMail, salary, jobBoard) => {
         try {
